@@ -3,6 +3,7 @@
 
 #secure files
 ConnectionString.config
+client_secret.json
 
 # User-specific files
 *.suo

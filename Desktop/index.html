@@ -19,14 +19,20 @@
         <label id="messageLabel" >hello</label>
         <input type="text" id="messageInput" />
         <br />
-        <a class="waves-effect waves-light btn" onclick="getData()"><i class="material-icons left">cloud</i>button</a>
-        <a class="btn-floating btn-large waves-effect waves-light red" onclick="postData()"><i class="material-icons">add</i></a>
+        <a class="waves-effect waves-light btn" onclick="beginAuth()"><i class="material-icons left">cloud</i>button</a>
+        <a class="btn-floating btn-large waves-effect waves-light red" onclick="finishAuth()"><i class="material-icons">add</i></a>
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.js"></script>
+        <script type="text/javascript" src="js/google_auth.js"></script>
         <script>
             var server = "https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/";
             //var server = "http://localhost:51471";
+            function finishAuth()
+            {
+                var token = document.getElementById("messageInput").value;
+                storeToken(token, getEmail);
+            }
             function showNotification() 
             {
                 var options = 
