@@ -1,0 +1,8 @@
+{
+  "name": "projectnopro",
+  "main": "index.html",
+  "permissions": [
+          "contentSettings",
+          "identity"
+        ]
+}
