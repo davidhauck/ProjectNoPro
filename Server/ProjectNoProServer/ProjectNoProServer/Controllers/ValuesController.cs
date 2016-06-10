@@ -1,4 +1,4 @@
-﻿using ProjectNoProServer.Models;
+﻿using ProjectNoProServer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
