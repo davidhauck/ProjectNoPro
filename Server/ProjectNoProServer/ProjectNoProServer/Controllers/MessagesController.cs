@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ProjectNoProServer.Entities;
-using ProjectNoProServer.Infrastructure;
+using ProjectNoProServer.Models;
 
 namespace ProjectNoProServer.Controllers
 {
     public class MessagesController : ApiController
     {
-        private ProjectNoProDataContext db = new ProjectNoProDataContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Messages
         public IQueryable<Message> GetMessages()
@@ -25,9 +25,11 @@ namespace ProjectNoProServer.Controllers
         }
 
         // GET: api/Messages/5
+        [Authorize]
         [ResponseType(typeof(Message))]
         public async Task<IHttpActionResult> GetMessage(int id)
         {
+            return Ok("Hello");
             Message message = await db.Messages.FindAsync(id);
             if (message == null)
             {
@@ -35,41 +37,6 @@ namespace ProjectNoProServer.Controllers
             }
 
             return Ok(message);
-        }
-
-        // PUT: api/Messages/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutMessage(int id, Message message)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != message.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(message).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MessageExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Messages
@@ -85,22 +52,6 @@ namespace ProjectNoProServer.Controllers
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = message.Id }, message);
-        }
-
-        // DELETE: api/Messages/5
-        [ResponseType(typeof(Message))]
-        public async Task<IHttpActionResult> DeleteMessage(int id)
-        {
-            Message message = await db.Messages.FindAsync(id);
-            if (message == null)
-            {
-                return NotFound();
-            }
-
-            db.Messages.Remove(message);
-            await db.SaveChangesAsync();
-
-            return Ok(message);
         }
 
         protected override void Dispose(bool disposing)

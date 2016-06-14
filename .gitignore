@@ -4,6 +4,7 @@
 #secure files
 ConnectionString.config
 client_secret.json
+*.Secret.cs
 
 # User-specific files
 *.suo

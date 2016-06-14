@@ -70,7 +70,7 @@ function getNewToken() {
  *
  * @param {Object} token The token to store to disk.
  */
-function storeToken(code, callback) {
+function loadToken(code, callback) {
   try {
     fs.mkdirSync(TOKEN_DIR);
   } catch (err) {
@@ -79,18 +79,18 @@ function storeToken(code, callback) {
     }
   }
 
-  alert(code);
- oauth2Client.getToken(code, function(err, token) {
-      if (err) {
-        console.log('Error while trying to retrieve access token', err);
-        return;
-      }
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-      oauth2Client.credentials = token;
-      alert(token.access_token);
-      console.log('Token stored to ' + TOKEN_PATH);
-      callback();
-    });
+  alert("Storing new token");
+  oauth2Client.getToken(code, function (err, token) {
+    if (err) {
+      console.log('Error while trying to retrieve access token', err);
+      return;
+    }
+    fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+    oauth2Client.credentials = token;
+    alert(token.access_token);
+    console.log('Token stored to ' + TOKEN_PATH);
+    callback();
+  });
 }
 
 /**
@@ -100,22 +100,22 @@ function storeToken(code, callback) {
  */
 function getEmail() {
   var ur = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='.concat(oauth2Client.credentials.access_token);
-   $.ajax({
-        method: 'GET',
-        url: ur, 
-        success: function(data){
-            if (data != "") {
-                document.getElementById("messageLabel").innerText = JSON.stringify(data);
-            }
-        },
-        error: function(xhr, status, error) {
-          alert(xhr.responseText);
-        },
-        complete: function(){
-            longPoll();
-        },
-        timeout: 30000
-    })
+  $.ajax({
+    method: 'GET',
+    url: ur,
+    success: function (data) {
+      if (data != "") {
+        document.getElementById("messageLabel").innerText = JSON.stringify(data);
+      }
+    },
+    error: function (xhr, status, error) {
+      alert(xhr.responseText);
+    },
+    complete: function () {
+      longPoll();
+    },
+    timeout: 30000
+  })
 
-  
+
 }
