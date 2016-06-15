@@ -1,12 +1,13 @@
 var gui = require('nw.gui');
+//var host = 'http://localhost:51471/';
+var host = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/';
 
 function beginGoogleAuth() {
-
   $.ajax({
-    url: "https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/api/Account/ExternalLogins?returnUrl=/&generateState=true",
+    url: host.concat('api/Account/ExternalLogins?returnUrl=/&generateState=true'),
     type: "GET",
     success: onOauthUrlsFound,
-    error: function(res) {
+    error: function (res) {
       alert(JSON.stringify(res));
     }
   });
@@ -14,22 +15,50 @@ function beginGoogleAuth() {
 
 function onOauthUrlsFound(res) {
   var googleUrl = findGoogleUrl(res);
-  var finalUrl = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net'.concat(googleUrl.Url);
+  var finalUrl = host.concat(googleUrl.Url);
   $("#testLabel").text(finalUrl);
-  var authWindow = window.open(finalUrl, "authWindow");
-  setTimeout(function() {
-      authWindow.alert(authWindow.location.href);
-      authWindow.location.href = finalUrl;
-  }, 2000);
-//  $(authWindow.document).bind('load', function(e) {
-//    alert("hello");
-//  });
+  var win = gui.Window.get();
+  var authWindow = gui.Window.open(host.concat(googleUrl.Url), {}, function (new_win) {
+    new_win.on('loaded', function () {
+      console.log('loaded');
+      (function loop() {
+        var l = new_win.window.location.href;
+        var i = l.indexOf('#access_token');
+        if (i > -1) {
+          var start = l.indexOf('=', i) + 1;
+          var end = l.indexOf('&', i);
+          var token = l.substring(start, end);
+          console.log(token);
+          accessTokenObtained(token);
+        }
+        else {
+          setTimeout(loop, 1000)
+        }
+      })();
+    });
+  });
 }
 
 function findGoogleUrl(arr) {
-  for (var i=0; i < arr.length; i++) {
+  for (var i = 0; i < arr.length; i++) {
     if (arr[i]["Name"] == "Google") {
       return arr[i];
     }
   };
+}
+
+function accessTokenObtained(token) {
+  $.ajax({
+    url: host.concat('api/Account/UserInfo'),
+    type: "GET",
+    success: function (res) {
+      alert(JSON.stringify(res));
+    },
+    headers: {
+      'Authorization': 'Bearer ' + token
+    },
+    error: function (res) {
+      alert(JSON.stringify(res));
+    }
+  });
 }
