@@ -53,8 +53,8 @@ namespace ProjectNoProServer.Models
     public class RegisterExternalBindingModel
     {
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
     }
 
     public class RemoveLoginBindingModel

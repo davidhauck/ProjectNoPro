@@ -62,7 +62,8 @@ namespace ProjectNoProServer
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = ProjectNoProServer.Classes.Constants.GoogleClientId,
-                ClientSecret = ProjectNoProServer.Classes.Constants.GoogleSecret
+                ClientSecret = ProjectNoProServer.Classes.Constants.GoogleSecret,
+                
             });
         }
     }

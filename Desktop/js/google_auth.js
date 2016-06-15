@@ -29,7 +29,9 @@ function onOauthUrlsFound(res) {
           var end = l.indexOf('&', i);
           var token = l.substring(start, end);
           console.log(token);
+          console.log(l);
           accessTokenObtained(token);
+          new_win.close();
         }
         else {
           setTimeout(loop, 1000)
@@ -52,13 +54,34 @@ function accessTokenObtained(token) {
     url: host.concat('api/Account/UserInfo'),
     type: "GET",
     success: function (res) {
-      alert(JSON.stringify(res));
+      if (res.HasRegistered == false) {
+        registerUser(res, token);
+      }
     },
     headers: {
       'Authorization': 'Bearer ' + token
     },
     error: function (res) {
       alert(JSON.stringify(res));
+    }
+  });
+}
+
+function registerUser(account, token) {
+  var theData = JSON.stringify({ 'Name': account.Name });
+  $.ajax({
+    url: host.concat('api/Account/RegisterExternal'),
+    data: theData,
+    contentType: 'application/json; charset=utf-8',
+    type: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    },
+    success: function (re) {
+      window.location.href = './index.html';
+    },
+    error: function (data) {
+      alert('Registration failed'.concat(JSON.stringify(data)));
     }
   });
 }
