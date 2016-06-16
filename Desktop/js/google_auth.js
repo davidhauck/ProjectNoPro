@@ -1,9 +1,10 @@
 var gui = require('nw.gui');
-//var host = 'http://localhost:51471/';
-var host = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/';
-
+var host = 'http://localhost:51471/';
+//var host = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/';
+localStorage.clear();
 if (localStorage.accessToken != null) {
-    window.location.href = './index.html';
+  alert('not clear');
+  window.location.href = './index.html';
 }
 
 function beginGoogleAuth() {
@@ -84,7 +85,6 @@ function registerUser(account) {
       'Authorization': 'Bearer ' + localStorage.accessToken
     },
     success: function (data) {
-      alert('Registration success'.concat(JSON.stringify(data)));
       window.location.href = './index.html';
     },
     error: function (data) {

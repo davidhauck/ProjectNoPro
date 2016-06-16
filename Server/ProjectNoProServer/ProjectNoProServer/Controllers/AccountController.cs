@@ -354,7 +354,16 @@ namespace ProjectNoProServer.Controllers
             var info = await Authentication.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                return InternalServerError();
+                return BadRequest();
+            }
+
+            if (model == null)
+            {
+                return BadRequest("model null");
+            }
+            if (model.Name == "" || model.Name == "n/a")
+            {
+                model.Name = User.Identity.GetUserName();
             }
 
             var user = new ApplicationUser() { UserName = model.Name, Email = info.Email };
