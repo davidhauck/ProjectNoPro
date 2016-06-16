@@ -2,6 +2,10 @@ var gui = require('nw.gui');
 //var host = 'http://localhost:51471/';
 var host = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/';
 
+if (localStorage.accessToken != null) {
+    window.location.href = './index.html';
+}
+
 function beginGoogleAuth() {
   $.ajax({
     url: host.concat('api/Account/ExternalLogins?returnUrl=/&generateState=true'),
@@ -28,9 +32,8 @@ function onOauthUrlsFound(res) {
           var start = l.indexOf('=', i) + 1;
           var end = l.indexOf('&', i);
           var token = l.substring(start, end);
-          console.log(token);
-          console.log(l);
-          accessTokenObtained(token);
+          localStorage.accessToken = token;
+          accessTokenObtained();
           new_win.close();
         }
         else {
@@ -49,17 +52,20 @@ function findGoogleUrl(arr) {
   };
 }
 
-function accessTokenObtained(token) {
+function accessTokenObtained() {
   $.ajax({
     url: host.concat('api/Account/UserInfo'),
     type: "GET",
     success: function (res) {
       if (res.HasRegistered == false) {
-        registerUser(res, token);
+        registerUser(res);
+      }
+      else {
+        window.location.href = './index.html';
       }
     },
     headers: {
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + localStorage.accessToken
     },
     error: function (res) {
       alert(JSON.stringify(res));
@@ -67,7 +73,7 @@ function accessTokenObtained(token) {
   });
 }
 
-function registerUser(account, token) {
+function registerUser(account) {
   var theData = JSON.stringify({ 'Name': account.Name });
   $.ajax({
     url: host.concat('api/Account/RegisterExternal'),
@@ -75,9 +81,10 @@ function registerUser(account, token) {
     contentType: 'application/json; charset=utf-8',
     type: 'POST',
     headers: {
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + localStorage.accessToken
     },
-    success: function (re) {
+    success: function (data) {
+      alert('Registration success'.concat(JSON.stringify(data)));
       window.location.href = './index.html';
     },
     error: function (data) {
