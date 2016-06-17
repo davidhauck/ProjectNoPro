@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectNoProServer.Hubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,32 +8,32 @@ using System.Web.Http;
 
 namespace ProjectNoProServer.Controllers
 {
-    [Authorize]
-    public class ValuesController : ApiController
+    public class NotificationController : ApiControllerWithHub<NotificationHub>
     {
-        // GET api/values
+        // GET: api/Notification
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET: api/Notification/5
         public string Get(int id)
         {
+            Hub.Clients.All.TestNotification("notification", id);
             return "value";
         }
 
-        // POST api/values
+        // POST: api/Notification
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT: api/Notification/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE: api/Notification/5
         public void Delete(int id)
         {
         }

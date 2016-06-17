@@ -65,6 +65,8 @@ namespace ProjectNoProServer
                 ClientSecret = ProjectNoProServer.Classes.Constants.GoogleSecret,
                 
             });
+
+            app.MapSignalR();
         }
     }
 }

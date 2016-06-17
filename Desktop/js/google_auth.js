@@ -1,9 +1,8 @@
 var gui = require('nw.gui');
 var host = 'http://localhost:51471/';
 //var host = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/';
-localStorage.clear();
+//localStorage.clear();
 if (localStorage.accessToken != null) {
-  alert('not clear');
   window.location.href = './index.html';
 }
 
