@@ -30,7 +30,7 @@ namespace ProjectNoProServer.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public void Post([FromBody]Entities.Message value)
         {
-            Hub.Clients.All.TestNotification("notification", value.Value);
+            Hub.Clients.All.TestNotification(value.Title, value.Text);
         }
 
         // PUT: api/Notification/5

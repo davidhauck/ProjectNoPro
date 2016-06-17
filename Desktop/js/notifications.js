@@ -4,7 +4,7 @@ $(function () {
     var nHub = $.connection.notification;
     nHub.client.TestNotification = function (title, message) {
         alert('got notification');
-        showNotification(title + message)
+        showNotification(title, message)
     };
 
     $.connection.hub.start().done(function () {
@@ -12,7 +12,7 @@ $(function () {
     });
 });
 
-function showNotification(text) 
+function showNotification(title, text) 
 {
     var options = 
         {
@@ -20,7 +20,7 @@ function showNotification(text)
             body: text
         };
 
-    var notification = new Notification("Notification Title",options);
+    var notification = new Notification(title,options);
     notification.onclick = function () 
     {
         alert('Notification clicked');

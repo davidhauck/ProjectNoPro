@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dhauck.projectnopro.classes.LocalStorage;
 import com.dhauck.projectnopro.fragments.LoginFragment;
 import com.dhauck.projectnopro.fragments.MainFragment;
 import com.google.gson.Gson;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
         }
 
-
+        LocalStorage.init(this);
 
 
 

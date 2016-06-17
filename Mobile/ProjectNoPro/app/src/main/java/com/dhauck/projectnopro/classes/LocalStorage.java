@@ -9,9 +9,20 @@ import android.content.SharedPreferences;
 public class LocalStorage {
     public static final String PREFS_NAME = "MyPrefsFile";
 
-    public static void setAccessToken(String token, Context ctx) {
-        SharedPreferences settings = ctx.getSharedPreferences(PREFS_NAME, 0);
+    private static Context context;
+
+    public static void init(Context ctx) {
+        context = ctx;
+    }
+
+    public static void setAccessToken(String token) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(token);
+        editor.putString("tokentag", token);
+    }
+
+    public static String getAccessToken() {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        return settings.getString("tokentag", null);
     }
 }

@@ -27,8 +27,6 @@ namespace ProjectNoProServer.Models
         {
         }
 
-        public DbSet<Message> Messages { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

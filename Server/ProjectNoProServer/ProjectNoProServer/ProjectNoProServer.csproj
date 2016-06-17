@@ -238,6 +238,10 @@
     <Compile Include="Migrations\201606142120467_AddUsers.Designer.cs">
       <DependentUpon>201606142120467_AddUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606170217321_RemoveMessages.cs" />
+    <Compile Include="Migrations\201606170217321_RemoveMessages.Designer.cs">
+      <DependentUpon>201606170217321_RemoveMessages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -305,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606142120467_AddUsers.resx">
       <DependentUpon>201606142120467_AddUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606170217321_RemoveMessages.resx">
+      <DependentUpon>201606170217321_RemoveMessages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
