@@ -10,19 +10,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.dhauck.projectnopro.MainActivity;
-import com.dhauck.projectnopro.Message;
 import com.dhauck.projectnopro.Models.ExternalLoginResponse;
 import com.dhauck.projectnopro.Models.UserCreationDto;
 import com.dhauck.projectnopro.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;

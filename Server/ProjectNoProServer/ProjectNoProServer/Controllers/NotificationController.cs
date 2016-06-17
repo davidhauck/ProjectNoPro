@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR.Messaging;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR.Messaging;
 using ProjectNoProServer.Hubs;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace ProjectNoProServer.Controllers
         }
 
         // POST: api/Notification
+        [OverrideAuthentication]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public void Post([FromBody]Entities.Message value)
         {
             Hub.Clients.All.TestNotification("notification", value.Value);

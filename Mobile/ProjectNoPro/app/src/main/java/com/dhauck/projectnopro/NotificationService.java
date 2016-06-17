@@ -5,6 +5,7 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
+import com.dhauck.projectnopro.Models.Message;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -78,7 +79,7 @@ public class NotificationService extends NotificationListenerService
         final String pack = sbn.getPackageName();
         final String ticker = sbn.getNotification().tickerText.toString();
         final Bundle extras = sbn.getNotification().extras;
-        final String title = extras.getString("android.title");
+        final String title = extras.getCharSequence("android.title").toString();
         final String text = extras.getCharSequence("android.text").toString();
 
 
@@ -92,9 +93,12 @@ public class NotificationService extends NotificationListenerService
                     conn.setDoOutput(true);
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json");
+                    conn.setRequestProperty("Authorization", "Bearer " + token);
+                    conn.setRequestProperty("Cookie", cookies);
                     Gson gson = new Gson();
                     Message m = new Message();
-                    m.value = text;
+                    m.text = text;
+                    m.title = title;
                     String input = gson.toJson(m);
                     OutputStream os = conn.getOutputStream();
                     os.write(input.getBytes());
