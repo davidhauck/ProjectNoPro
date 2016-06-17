@@ -5,7 +5,6 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -104,59 +103,9 @@
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.js"></script>
-        <script>
-            var server = "https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/";
-            //var server = "http://localhost:51471";
-            function showNotification() 
-            {
-                var options = 
-                    {
-                        icon: "http://r.ddmcdn.com/s_f/o_1/cx_633/cy_0/cw_1725/ch_1725/w_720/APL/uploads/2014/11/too-cute-doggone-it-video-playlist.jpg",
-                        body: "Here is the notification text"
-                    };
-
-                var notification = new Notification("Notification Title",options);
-                notification.onclick = function () 
-                {
-                    alert('Notification clicked');
-                }
-                
-            }
-            var http = require('http');
-            function getData()
-            {
-                var longPoll = function(){
-                    $.ajax({
-                        method: 'GET',
-                        url: server.concat('/api/values'), 
-                        success: function(data){
-                            if (data != "") {
-                                document.getElementById("messageLabel").innerText = data;
-                            }
-                        },
-                        complete: function(){
-                            longPoll();
-                        },
-                        timeout: 30000
-                    })
-                };
-                longPoll();
-            }
-            function postData()
-            {
-                var myValue = document.getElementById("messageInput").value;
-                $.ajax({
-                    method: 'POST',
-                    url: server.concat('/api/values'), 
-                    data: JSON.stringify({value: myValue}),
-                    contentType: 'application/json; charset=utf-8',
-                    success: function(data){
-                        alert('success')
-                    },
-                    timeout: 10000
-                });
-            }
-            getData();
-        </script>
+        <script src="js/jquery.signalR-2.2.0.min.js"></script>
+        <!--<script src="http://localhost:51471/signalr/hubs"></script>-->
+        <script src="https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/signalr/hubs"></script>
+        <script type="text/javascript" src="js/notifications.js"></script>
     </body>
 </html>

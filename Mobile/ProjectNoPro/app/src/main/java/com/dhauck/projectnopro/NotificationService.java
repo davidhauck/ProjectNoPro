@@ -81,12 +81,13 @@ public class NotificationService extends NotificationListenerService
         final String title = extras.getString("android.title");
         final String text = extras.getCharSequence("android.text").toString();
 
+
         Runnable r = new Runnable()
         {
             public void run()
             {
                 try {
-                    URL url = new URL("https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/api/values");
+                    URL url = new URL("https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/api/Notification");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoOutput(true);
                     conn.setRequestMethod("POST");
@@ -99,7 +100,7 @@ public class NotificationService extends NotificationListenerService
                     os.write(input.getBytes());
                     os.flush();
 
-                    if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                    if (conn.getResponseCode() != HttpURLConnection.HTTP_NO_CONTENT) {
                         throw new RuntimeException("Failed : HTTP error code : "
                                 + conn.getResponseCode());
                     }
@@ -120,6 +121,7 @@ public class NotificationService extends NotificationListenerService
                 }
             }
         };
+
         Thread t = new Thread(r);
         t.start();
     }

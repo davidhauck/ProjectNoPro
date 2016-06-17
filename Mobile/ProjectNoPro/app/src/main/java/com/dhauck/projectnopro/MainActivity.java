@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dhauck.projectnopro.fragments.LoginFragment;
+import com.dhauck.projectnopro.fragments.MainFragment;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -31,14 +33,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -49,6 +51,42 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        if (findViewById(R.id.fragment_container) != null)
+        {
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            LoginFragment loginFragment = new LoginFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    public void switchToMainFragment() {
+
+        Runnable r = new Runnable() {
+            public void run() {
+                MainFragment mainFragment = new MainFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mainFragment).commit();
+            }
+        };
+
+        this.runOnUiThread(r);
     }
 
     @Override
