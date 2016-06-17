@@ -19,6 +19,7 @@ public class LocalStorage {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("tokentag", token);
+        editor.apply();
     }
 
     public static String getAccessToken() {

@@ -12,6 +12,7 @@ namespace ProjectNoProServer.Hubs
     [HubName("notification")]
     public class NotificationHub : Hub
     {
+        [HubMethodName("joinGroup")]
         public Task JoinGroup(string s)
         {
             string id = null;

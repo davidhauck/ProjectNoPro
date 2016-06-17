@@ -13,6 +13,7 @@ import com.dhauck.projectnopro.MainActivity;
 import com.dhauck.projectnopro.Models.ExternalLoginResponse;
 import com.dhauck.projectnopro.Models.UserCreationDto;
 import com.dhauck.projectnopro.R;
+import com.dhauck.projectnopro.classes.LocalStorage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -55,6 +56,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void tokenObtained(String token) {
+        LocalStorage.setAccessToken(token);
+        String x = LocalStorage.getAccessToken();
         CookieManager cookieManager = CookieManager.getInstance();
         String cookies = cookieManager.getCookie(host);
         if (cookies.contains(".AspNet.Cookies")) {

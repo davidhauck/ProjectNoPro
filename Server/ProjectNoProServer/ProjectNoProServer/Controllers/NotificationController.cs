@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR.Messaging;
+using Microsoft.Owin.Security;
 using ProjectNoProServer.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace ProjectNoProServer.Controllers
@@ -26,11 +28,23 @@ namespace ProjectNoProServer.Controllers
         }
 
         // POST: api/Notification
-        [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        public void Post([FromBody]Entities.Message value)
+        public async void Post([FromBody]Entities.Message value)
         {
-            Hub.Clients.All.TestNotification(value.Title, value.Text);
+            string id = null;
+            foreach (var claim in (User.Identity as ClaimsIdentity).Claims)
+            {
+                if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")
+                    id = claim.Value;
+            }
+
+            Hub.Clients.Group(id).TestNotification(value.Title, value.Text);
+        }
+
+
+        private IAuthenticationManager Authentication
+        {
+            get { return Request.GetOwinContext().Authentication; }
         }
 
         // PUT: api/Notification/5

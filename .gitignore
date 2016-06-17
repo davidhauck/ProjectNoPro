@@ -6,6 +6,9 @@ ConnectionString.config
 client_secret.json
 *.Secret.cs
 
+#Android
+*.apk
+
 # User-specific files
 *.suo
 *.user
