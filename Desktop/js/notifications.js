@@ -7,11 +7,17 @@ $(function () {
         showNotification(title, message)
     };
 
+    nHub.client.TextMessageReceived = textMessageReceived;
+
     $.connection.hub.start().done(function () {
         console.log('connected');
         joinGroup();
     });
 });
+
+function textMessageReceived(textMessage) {
+    alert('got text message', JSON.stringify(textMessage));
+}
 
 function joinGroup() {
     var nHub = $.connection.notification;

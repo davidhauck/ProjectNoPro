@@ -225,7 +225,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\TextController.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\TextMessage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
