@@ -81,6 +81,7 @@ public class NotificationService extends NotificationListenerService
         final String title = extras.getString("android.title");
         final String text = extras.getCharSequence("android.text").toString();
 
+
         Runnable r = new Runnable()
         {
             public void run()
@@ -99,7 +100,7 @@ public class NotificationService extends NotificationListenerService
                     os.write(input.getBytes());
                     os.flush();
 
-                    if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                    if (conn.getResponseCode() != HttpURLConnection.HTTP_NO_CONTENT) {
                         throw new RuntimeException("Failed : HTTP error code : "
                                 + conn.getResponseCode());
                     }
@@ -120,6 +121,7 @@ public class NotificationService extends NotificationListenerService
                 }
             }
         };
+
         Thread t = new Thread(r);
         t.start();
     }

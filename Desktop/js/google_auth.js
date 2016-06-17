@@ -1,7 +1,7 @@
 var gui = require('nw.gui');
 localStorage.clear();
-localStorage.host = "http://localhost:51471/";
-//localStorage.host = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/';
+//localStorage.host = "http://localhost:51471/";
+localStorage.host = 'https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/';
 if (localStorage.accessToken != null) {
   window.location.href = './index.html';
 }
@@ -18,7 +18,6 @@ function beginGoogleAuth() {
 }
 
 function onOauthUrlsFound(res) {
-  alert('found');
   var googleUrl = findGoogleUrl(res);
   var finalUrl = localStorage.host.concat(googleUrl.Url);
   $("#testLabel").text(finalUrl);

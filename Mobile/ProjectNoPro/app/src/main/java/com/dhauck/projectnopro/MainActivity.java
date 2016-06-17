@@ -61,6 +61,20 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public void switchToMainFragment() {
