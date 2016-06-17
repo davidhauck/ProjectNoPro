@@ -10,6 +10,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using ProjectNoProServer.Providers;
 using ProjectNoProServer.Models;
+using Microsoft.Owin.Cors;
+using Microsoft.AspNet.SignalR;
 
 namespace ProjectNoProServer
 {
@@ -66,6 +68,12 @@ namespace ProjectNoProServer
                 
             });
 
+            app.Map("/signalr", map =>
+            {
+                map.UseCors(CorsOptions.AllowAll);
+                var hubConfiguration = new HubConfiguration { };
+                map.RunSignalR(hubConfiguration);
+            });
             app.MapSignalR();
         }
     }

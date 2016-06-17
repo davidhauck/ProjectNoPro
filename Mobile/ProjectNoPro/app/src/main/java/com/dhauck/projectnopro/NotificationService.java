@@ -86,7 +86,7 @@ public class NotificationService extends NotificationListenerService
             public void run()
             {
                 try {
-                    URL url = new URL("https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/api/values");
+                    URL url = new URL("https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/api/Notification");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoOutput(true);
                     conn.setRequestMethod("POST");

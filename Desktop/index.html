@@ -61,7 +61,10 @@
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/notifications.js" />
+        <script src="js/jquery.signalR-2.2.0.min.js"></script>
+        <script src="http://localhost:51471/signalr/hubs"></script>
+        <!--<script src="https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/signalr/hubs"></script>-->
+        <script type="text/javascript" src="js/notifications.js"></script>
         <script>
             var server = "https://microsoft-apiapp7ba89e03b5fa4c9b8f7e54324dddecb0.azurewebsites.net/";
             //var server = "http://localhost:51471";
@@ -114,7 +117,7 @@
                     timeout: 10000
                 });
             }
-            getData();
+            //getData();
         </script>
     </body>
 </html>

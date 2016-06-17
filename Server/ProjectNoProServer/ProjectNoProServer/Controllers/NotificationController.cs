@@ -1,4 +1,5 @@
-﻿using ProjectNoProServer.Hubs;
+﻿using Microsoft.AspNet.SignalR.Messaging;
+using ProjectNoProServer.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,9 @@ namespace ProjectNoProServer.Controllers
         }
 
         // POST: api/Notification
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Entities.Message value)
         {
+            Hub.Clients.All.TestNotification("notification", value.Value);
         }
 
         // PUT: api/Notification/5
