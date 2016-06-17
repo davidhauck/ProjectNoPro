@@ -12,11 +12,15 @@
     <style type="text/css">
     
    .bottomdiv{
-        position:fixed
+        position: fixed;
         bottom: 0;
     }
 
-     label {
+    .leftlist{
+        position:fixed;
+    }
+
+    label {
         background-color: white;
         font-size: large;
         position: fixed;
@@ -28,11 +32,42 @@
         bottom: 0;
         right: 0;
         width: 75px;
-
     }
+
+    .contactIcon{
+        position: fixed;
+        bottom: 5px;
+        left: 45px;
+        
+    }
+
+    .textIcon{
+        position: fixed;
+        bottom: 5px;
+        left: 10px;
+    }
+
+    .snoozeIcon{
+        position: fixed;
+        bottom: 5px;
+        left: 80px;
+    }
+
+    .settingsIcon{
+        position: fixed;
+        bottom: 5px;
+        left: 150px;
+    }
+
+    .searchIcon{
+        position: fixed;
+        bottom: 5px;
+        left: 115px;
+    }
+
     input{
         position: absolute;
-        bottom: 21px;
+        bottom: 20px;
         right: 0px;
     }
     nav{
@@ -41,8 +76,15 @@
     }
     </style>
     <body>
+        <!--Colored comment box-->
+        <div style="width: 200px; height: 37px; background-color:#2196f3;" class="bottomdiv"></div>
 
-        <div style="width: 50px; height: 50px; background-color:blue;" class="bottomdiv"></div>
+        <!--Icons in bottom left-->
+        <i class="material-icons small contactIcon">perm_identity</i>
+        <i class="material-icons small textIcon">chat_bubble_outline</i>
+        <i class="material-icons small snoozeIcon">snooze</i>
+        <i class="material-icons small settingsIcon">settings</i>
+        <i class="material-icons small searchIcon">search</i>
 
         <label id="messageLabel">NoPro</label>
         <!--Text input-->
@@ -51,7 +93,7 @@
         <!--Submit button-->
         <button class="btn waves-effect waves-light blue submitButton" onclick="postData()"><i class="material-icons left">send</i>submit</button>
             <!--Left side list for texts-->
-            <div class="collection" style="width:200px">
+            <div class="collection leftlist" style="width:200px">
                 <a href="#!" class="collection-item">Text</a>
                 <a href="#!" class="collection-item">Text</a>
                 <a href="#!" class="collection-item">Text</a>
